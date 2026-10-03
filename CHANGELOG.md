@@ -49,6 +49,7 @@
 `generate_report` 的 L3 章节同步输出口径判定与派生处置说明，让红线从代码注释走进最终报告。
 
 验证：内部红线回归测试 **28/28 PASS**，覆盖某农村饮水工程真实值、毛口径陷阱、"毛中含净"文本、basis 缺失、NaN 边界。
+该测试脚本依赖内部私有仓库，**不在本开源包内分发**；如需复核结果，请联系 <insigoo@insigoo.cn>。
 
 ### 移除的内容
 
@@ -92,7 +93,11 @@
 
 - `references/l3/l3-calculator.ts`：`tsc --strict --noEmit` **独立编译通过**
 - 红线修复：`_test_sroi_redline.mjs` **28/28 PASS**
-- 开源包自检：`_verify_open_skill.py` 14 项全 PASS（含新增的 L3 资产与脱敏红线检查）
+- 开源包自检：`_verify_open_skill.py` **18 项全 PASS**（含新增的 L3 资产与脱敏红线检查）
+
+> 上述测试与自检脚本依赖内部私有仓库，**不在本开源包内分发**，因此无法从本仓库直接复跑；
+> 如需复核测试结论，请联系 <insigoo@insigoo.cn>。
+> 可自行复核的部分：本包随附 `references/l3/l3-calculator.ts`（纯函数、零依赖），可独立编译与单测。
 
 ---
 
