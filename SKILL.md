@@ -555,7 +555,7 @@ L2 总分 = D1(25) + D2(30) + D3(25) + D4(20)，满分100
 >
 > ⚠️ **使用 L3 前必读**：`references/l3/l3-redline-double-deduction.md`。第三方 SROI 若已内含四系数调整，**严禁再乘本项目自估净贡献率**（重复扣减）。这是 L3 里代价最高、最隐蔽的一类错误——它不报错，只安静产出偏低的数字。
 >
-> **计算方式**：优先通过 MCP 知识库工具 `l3_signals` / `get_counterfactual` / `generate_report` 实时调用（见文末「MCP 知识库工具调用约定」）；未接入 MCP 时，可用参考实现 `references/l3/l3-calculator.ts` 的纯函数本地计算（零依赖）。反事实四系数原始值存于 COZE 云 `sia_kb.sia_counterfactual`，经 GRANT 授权后由工具直读，未授权时走「系数输入计算模式」。
+> **计算方式**：优先通过 MCP 知识库工具 `l3_signals` / `get_counterfactual` / `generate_report` 实时调用（见文末「MCP 知识库工具调用约定」）；未接入 MCP 时，可用参考实现 `references/l3/l3-calculator.ts` 的纯函数本地计算（零依赖）。反事实四系数原始值存于 `sia_kb` 项目库，由工具直读；若当前接入方式无该表的读取权限，则走「系数输入计算模式」（由调用方直接传入四个系数）。
 
 ### L3 开放资产（v3.0.0 起随包开源）
 
@@ -628,7 +628,7 @@ L2 总分 = D1(25) + D2(30) + D3(25) + D4(20)，满分100
 
 ## MCP 知识库工具调用约定（产品化接入 · 2026-08-23）
 
-本技能已配套 **SIA 知识库 MCP Server（`sia-kb`）**，将 `sia_kb`（COZE 云 PostgreSQL，223 公益项目 + L2/L3 评估数据）产品化为可被 AI 直接消费的服务。**评估时优先调用 MCP 工具查库，而非依赖 COZE 批量回传文件**——实现"自动查库、补指标、出报告"的产品闭环。
+本技能已配套 **SIA 知识库 MCP Server（`sia-kb`）**，将 `sia_kb`（云端 PostgreSQL 实例，223 公益项目 + L2/L3 评估数据）产品化为可被 AI 直接消费的服务。**评估时优先调用 MCP 工具查库，而非依赖批量回传文件**——实现"自动查库、补指标、出报告"的产品闭环。
 
 ### 可用工具（7 个）
 
@@ -644,17 +644,17 @@ L2 总分 = D1(25) + D2(30) + D3(25) + D4(20)，满分100
 
 ### 调用纪律
 
-1. **字段对齐**：库真实列名为 `project_name`/`platform`/`org_name`/`category`(单字符码 A/B/C/D/X)/`l2_grade`(A-D)/`evidence_level`(A-E)/`has_counterfactual`(bool)/`d1-d4`/`fairness_flag`，**非** COZE 接入说明早期文档里的 `title`/`source_platform`。
+1. **字段对齐**：库真实列名为 `project_name`/`platform`/`org_name`/`category`(单字符码 A/B/C/D/X)/`l2_grade`(A-D)/`evidence_level`(A-E)/`has_counterfactual`(bool)/`d1-d4`/`fairness_flag`，**非**早期接入说明文档里的 `title`/`source_platform`。
 2. **L2 评估闭环**：进入 L2 深度评估（Step 3 起）即调用 `get_project`/`get_indicators` 拉取该项目在 `sia_kb` 的已有数据，与用户提交材料交叉核对；已有指标直接引用，缺口项才需用户补。
 3. **L3 不手算**：L2 报告 Step 6 的 L3 就绪度，调用 `l3_signals` + `get_counterfactual`（或 `generate_report`）实时得出，不凭记忆硬编码阈值；反事实通过率分母一律用「已评 L2 项目池」。
 4. **双重扣减红线**：用 `get_counterfactual` 算净贡献率时，若项目已有第三方净 SROI（如某农村饮水工程 5.6），严禁再乘自估净贡献率——第三方净 SROI 作中枢值，四系数作独立敏感性参数。
-5. **降级可知**：`sia_counterfactual` 表对只读账号默认无 SELECT 权限，`get_counterfactual` 会返回 `counterfactual_table.source = "unauthorized"` 并附 COZE 侧 GRANT 脚本路径；此时可让用户在调用时传入四个系数走「系数输入计算模式」。
+5. **降级可知**：`sia_counterfactual` 表在部分接入方式下可能无读取权限，此时 `get_counterfactual` 会返回 `counterfactual_table.source = "unauthorized"`；可让用户在调用时传入四个系数走「系数输入计算模式」。
 
-> **配套服务端（选配，非本技能运行的必要条件）**：本项目另有 `sia-kb` MCP Server（TypeScript + stdio，供 AI 助手直接调用 `sia_kb` 项目库）与 REST API（FastAPI，默认端口 8787，供前端/第三方 HTTP 调用）两个服务端形态，源码与部署说明见仓库 README 的「配套服务」章节。
+> **配套服务端（选配，非本技能运行的必要条件）**：本项目另有 `sia-kb` MCP Server（TypeScript + stdio，供 AI 助手直接调用 `sia_kb` 项目库）与 REST API（供前端/第三方 HTTP 调用）两个服务端形态，二者均为独立部署的选配件，不在本开源包内（见 README「未开源清单」）。
 > WorkBuddy 用户可在 `~/.workbuddy/mcp.json` 增加 `sia-kb` 条目后重载生效。**未接入时不影响 L1/L2 评估完整性**，仅失去同类目对标与已有评估数据复用能力。
 
 *本评估框架由因思阁(insigoo)基于友成三A三力理论与社会影响力评估标准自主开发。*
-*许可：MIT · 仓库：github.com/ericyueric · 联系：insigoo@insigoo.cn*
-*版本历史：v1.0.0 初版发布 | v1.1.0 新增快速自检/批量评审模式、受益方视角检验、假设模式库、三级优先级、成熟度判定 | v2.0.0 新增 L2 指标量化层深度评估模式（四维评分 D1-D4、证据五级定级 A-E、L2 四级分级、医疗救助/自然保护两类参考指标集、L1→L2 衔接规则），L1 部分保持 v1.1 稳定 | v2.0.0 + MCP 接入（2026-08-23）：配套 SIA 知识库 MCP Server `sia-kb` 与 FastAPI REST API，评估时自动调库出报告，详见文末「MCP 知识库工具调用约定」 | v2.2.0（2026-09-11）：新增 SDG 贡献对齐层（模块A）/ 问责机制成熟度 operationalize 受益方中心（模块B）/ OECD 三标准轻量追问（模块C）/ 非预期结果追踪（模块D）；L1 插入 Step 3.5、L2 报告六→七板块；新增字段全 NULL-able，老项目兼容；`sia_kb.sia_projects` 同步 ALTER 扩 6 列（协同 COZE，见《sia_kb v2.2 ALTER 协同 COZE》）*
+*许可：MIT · 仓库：github.com/ericyueric/insigoo-sia-open · 联系：insigoo@insigoo.cn*
+*版本历史：v1.0.0 初版发布 | v1.1.0 新增快速自检/批量评审模式、受益方视角检验、假设模式库、三级优先级、成熟度判定 | v2.0.0 新增 L2 指标量化层深度评估模式（四维评分 D1-D4、证据五级定级 A-E、L2 四级分级、医疗救助/自然保护两类参考指标集、L1→L2 衔接规则），L1 部分保持 v1.1 稳定 | v2.0.0 + MCP 接入（2026-08-23）：配套 SIA 知识库 MCP Server `sia-kb` 与 FastAPI REST API，评估时自动调库出报告，详见文末「MCP 知识库工具调用约定」 | v2.2.0（2026-09-11）：新增 SDG 贡献对齐层（模块A）/ 问责机制成熟度 operationalize 受益方中心（模块B）/ OECD 三标准轻量追问（模块C）/ 非预期结果追踪（模块D）；L1 插入 Step 3.5、L2 报告六→七板块；新增字段全 NULL-able，老项目兼容；`sia_kb.sia_projects` 同步 ALTER 扩 6 列（与数据侧协同，见内部变更记录）*
 *版本历史续：v3.0.0（2026-10-01）：**L2 指标量化层全开源**——移除 X402 按次付费链路与「预评估模式」降级围栏，完整评分锚点/证据定级规则/标杆案例库回归本地 `references/l2-scoring-rubrics.md`；参考指标集由 2 类扩至 5 类（新增教育助学/乡村振兴·扶贫/养老服务）；新增机器可读评分表 `references/l2-scoring-machine-readable.json`；L3 设计草案一并开放；补 `LICENSE`(MIT) 与开源声明。*
 *版本口径说明：本技能 L1 基线记为 v1.1.0；《互联网公益项目逻辑自洽性百项快检观察》发表版将所述实测版本记为 "SIA v1.2"，与本 v1.1.0 基线方法论一致，仅版本标签不同，内容已对齐。*

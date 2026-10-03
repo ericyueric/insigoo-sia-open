@@ -97,12 +97,12 @@ export function evaluateL3Signals(s: L3SignalsInput): {
 }
 
 /**
- * 货币化轨道 SROI 校验（2026-08-23 COZE 澄清后口径·方案A）。
+ * 货币化轨道 SROI 校验（2026-08-23 数据侧澄清后口径·方案A）。
  *
- * 字段语义（已与 COZE 对齐）：
+ * 字段语义（已与数据侧对齐）：
  * - sroi_low/high = **净贡献率区间**（非货币化 SROI），由反事实四系数 (1-d)(1-a)(1-disp)(1-drop)
  *   的保守/乐观两端推导；已与库内回填值核对一致（三项目 net 均落在区间内）。
- * - sroi_central（COZE 待 ALTER 建列）= **货币化 SROI 点估计**（X:1 回报比，第三方/权威口径），
+ * - sroi_central（待建列）= **货币化 SROI 点估计**（X:1 回报比，第三方/权威口径），
  *   仅在有明确来源时填，否则 NULL；与净贡献率是两种量纲，结构上分离根治混存 bug。
  *
  * 价值判定：positive_value 以净贡献率 netRate 为准（≥0.1 价值稳健为正），不以 sroi_low/high 直接判 SROI>1。
