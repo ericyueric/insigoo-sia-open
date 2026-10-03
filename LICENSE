@@ -1,0 +1,32 @@
+MIT License
+
+Copyright (c) 2026 因思阁 insigoo (广州市因思阁咨询有限公司)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+商标说明："insigoo" 与 "因思阁" 是广州市因思阁咨询有限公司的标识。
+本 MIT 许可不授予上述商标的任何使用权。
+
+数据说明：本许可仅覆盖本仓库的方法论文档与代码。
+`sia_kb` 公益项目数据库（223 个项目）的原始数据，系由本团队自行采集自
+腾讯公益、支付宝公益、慈善中国等平台的公开项目页面，不随本仓库分发，
+也不在本许可范围内。本仓库仅在脱敏聚合层面引用其统计结果，
+作为方法验证的依据。
