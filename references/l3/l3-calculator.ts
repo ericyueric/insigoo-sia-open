@@ -1,7 +1,7 @@
 /**
  * insigoo SIA · L3 价值评估层 —— 参考实现（Reference Implementation）
  *
- * 许可：MIT ｜ 归属：因思阁 insigoo ｜ 仓库：github.com/ericyueric/insigoo-sia
+ * 许可：MIT ｜ 归属：因思阁 insigoo ｜ 仓库：github.com/ericyueric/insigoo-sia-open
  *
  * 本文件是 L3 三个算子的可执行定义，对应《l3-design-draft.md》v0.3：
  *   1. netContributionRate —— 反事实四系数净贡献率

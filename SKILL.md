@@ -11,7 +11,7 @@ allowed-tools: Read
 >
 > 本技能以 **MIT 许可** 开源发布。L1 逻辑自洽层 + L2 指标量化层（含完整评分锚点、证据五级定级规则、五类参考指标集）+ L3 价值评估层设计草案，全部随包分发、可离线运行、无付费门槛。
 > 原 L2 的 X402 按次付费链路已在开源版中移除；付费版（insigoo-sia-pro）另行独立维护，本开源包与其无依赖。
-> 仓库：`github.com/ericyueric/insigoo-sia` ｜ 许可：`LICENSE`（MIT） ｜ 归属：因思阁 insigoo
+> 仓库：`github.com/ericyueric/insigoo-sia-open` ｜ 许可：`LICENSE`（MIT） ｜ 补充声明：`NOTICE.md` ｜ 归属：因思阁 insigoo
 
 # 🩺 公益项目"逻辑体检医生" — L1 逻辑自洽评估 + 🧪 L2 指标量化评估
 
@@ -618,7 +618,7 @@ L2 总分 = D1(25) + D2(30) + D3(25) + D4(20)，满分100
 
 **引用格式（建议）**：
 
-> 因思阁(insigoo). 《公益项目社会影响力评估框架 SIA v3.0.0：L1 逻辑自洽 + L2 指标量化》[EB/OL]. github.com/ericyueric/insigoo-sia, 2026. MIT License.
+> 因思阁(insigoo). 《公益项目社会影响力评估框架 SIA v3.0.0：L1 逻辑自洽 + L2 指标量化 + L3 社会价值评估》[EB/OL]. github.com/ericyueric/insigoo-sia-open, 2026. MIT License.
 
 **衍生与贡献**：欢迎 Fork、提 Issue、发 PR。若你在实践中调整了评分锚点或补充了新的类目指标集，请在 PR 中说明 **改动依据（实测样本数 + 判例）** —— 本框架的每条锚点都应有实测来源。
 

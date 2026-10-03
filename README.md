@@ -5,7 +5,7 @@
 > L3 是"估价单"——这些改变值多少？
 
 **版本**：v3.0.0（2026-10-01） ｜ **许可**：MIT ｜ **作者**：insigoo（因思阁 · 广州市因思阁咨询有限公司）  
-**仓库**：github.com/ericyueric/insigoo-sia ｜ **联系**：<insigoo@insigoo.cn>
+**仓库**：github.com/ericyueric/insigoo-sia-open ｜ **联系**：<insigoo@insigoo.cn>
 
 ---
 
@@ -81,6 +81,7 @@ L2 总分 = D1(25) + D2(30) + D3(25) + D4(20)，满分 100
 insigoo-sia-open/
 ├── SKILL.md                              # 技能主文件（L1 + L2 全部规则，v3.0.0）
 ├── LICENSE                               # MIT
+├── NOTICE.md                             # 商标 / 数据范围 / 免责补充
 ├── README.md / CHANGELOG.md
 └── references/
     ├── l2-scoring-rubrics.md             # ★ D1-D4 完整评分锚点 + 证据五级判定 + 标杆案例
@@ -132,11 +133,11 @@ insigoo-sia-open/
 - 本框架是 **发展性评估工具**，不是审计工具，**不得用于财务/合规/问责审计**
 - 输出为 **AI 辅助评估初稿**（AI 初评 + 人工复核质控），重大资助决策需结合人工尽调与专家判断
 - L3 货币化轨道不建议在 L2-A 以下项目出具
-- c，**不在 MIT 许可范围内**，使用前需单授权
+- `sia_kb` 项目库原始采集数据不在本许可范围内：本仓库仅引用脱敏聚合统计，不分发原始数据（详见 `NOTICE.md`）
 
 ## 引用
 
-> 因思阁(insigoo). 《公益项目社会影响力评估框架 SIA v3.0.0：L1 逻辑自洽 + L2 指标量化》[EB/OL]. github.com/ericyueric/insigoo-sia, 2026. MIT License.
+> 因思阁(insigoo). 《公益项目社会影响力评估框架 SIA v3.0.0：L1 逻辑自洽 + L2 指标量化 + L3 社会价值评估》[EB/OL]. github.com/ericyueric/insigoo-sia-open, 2026. MIT License.
 
 ## 贡献
 
