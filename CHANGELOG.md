@@ -14,7 +14,7 @@
 | 机器可读评分表 | 同上 | 新增 `references/l2-scoring-machine-readable.json` |
 | 教育助学 / 乡村振兴·扶贫 / 养老服务 三类指标集 | 付费版 references | 指标集由 2 类扩至 **5 类** |
 | **L3 方法论 v0.3** | 免费版 references（此前未对外宣传） | 双轨制 + 反事实四系数 + 公平维度，一并开放 |
-| **L3 参考实现** | sia-mcp-server `src/calc.ts` | 新增 `references/l3/l3-calculator.ts`，纯函数零依赖 |
+| **L3 参考实现** | 内部 MCP 服务端 `src/calc.ts` | 新增 `references/l3/l3-calculator.ts`，纯函数零依赖 |
 | **L3 验证案例** | 内部验证报告（本轮脱敏） | 新增 `references/l3/case-study-rural-water.md` |
 | **重复扣减红线** | 从草案 §3 抽出独立成篇 | 新增 `references/l3/l3-redline-double-deduction.md` |
 
@@ -48,7 +48,7 @@
 新增字段 `sroi_central_basis_kind` / `sroi_central_derivation_note`，
 `generate_report` 的 L3 章节同步输出口径判定与派生处置说明，让红线从代码注释走进最终报告。
 
-验证：`sia-mcp-server/_test_sroi_redline.mjs` **28/28 PASS**，覆盖某农村饮水工程真实值、毛口径陷阱、"毛中含净"文本、basis 缺失、NaN 边界。
+验证：内部红线回归测试 **28/28 PASS**，覆盖某农村饮水工程真实值、毛口径陷阱、"毛中含净"文本、basis 缺失、NaN 边界。
 
 ### 移除的内容
 
@@ -77,7 +77,7 @@
 - `references/l3/` 目录（L3 由散落内部文档升级为成体系的开放资产）：
   - `l3-design-draft.md`（v0.2 原稿一字未改 + v0.3 开源升级说明追加在后）
   - `l3-redline-double-deduction.md`
-  - `l3-calculator.ts`（从 sia-mcp-server 原文复制，非手抄）
+  - `l3-calculator.ts`（从内部 MCP 服务端原文复制，非手抄）
   - `case-study-rural-water.md`（脱敏版）
 
 ### 不开源的部分（有意保留）
