@@ -76,7 +76,7 @@
 - `references/l2-scoring-machine-readable.json`
 - `references/indicators-education.md` / `indicators-poverty.md` / `indicators-elderly.md`
 - `references/l3/` 目录（L3 由散落内部文档升级为成体系的开放资产）：
-  - `l3-design-draft.md`（v0.2 原稿一字未改 + v0.3 开源升级说明追加在后）
+  - `l3-design-draft.md`（v0.2 原稿结构与论证完整保留 + v0.3 开源升级说明追加在后；对外发布前对正文做了脱敏与引用规范化处理：项目名称代号化、内部协作方与内部文档名泛化、方法论引用改指 SROI 通行方法论）
   - `l3-redline-double-deduction.md`
   - `l3-calculator.ts`（从内部 MCP 服务端原文复制，非手抄）
   - `case-study-rural-water.md`（脱敏版）
