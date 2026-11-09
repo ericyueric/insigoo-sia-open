@@ -21,12 +21,13 @@
 - 本仓库**不分发**原始采集数据
 - 本仓库仅在**脱敏聚合**层面引用其统计结果，作为方法验证的依据
 - 如需使用原始数据，请自行访问各来源平台的公开页面，并遵守该平台的条款
+- 本仓库 `server/` 目录开放服务端可公开代码，不含任何生产凭据、内部网络地址或项目数据
 
 ---
 
 ## 3. 引用格式（建议）
 
-> 因思阁(insigoo). 《公益项目社会影响力评估框架 SIA v3.1.0：L1 逻辑自洽 + L2 指标量化 + L3 社会价值评估》[EB/OL]. github.com/ericyueric/insigoo-sia-open, 2026. MIT License.
+> 因思阁(insigoo). 《公益项目社会影响力评估框架 SIA v3.2.0：L1 逻辑自洽 + L2 指标量化 + L3 社会价值评估 + D 线主体评估》[EB/OL]. github.com/ericyueric/insigoo-sia-open, 2026. MIT License.
 
 ---
 
