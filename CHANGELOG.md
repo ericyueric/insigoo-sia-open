@@ -1,5 +1,47 @@
 # 变更日志
 
+## v3.2.1（2026-11-09）— 并入 HTML/PDF 报告输出管线
+
+**背景**：收口为单一开源 Skill 时，本机 v2.1.2 独有的报告美化资产未随 v3.2.0 并入，导致本机一度失去 HTML/PDF 报告能力。本版把该管线补回唯一发行版。
+
+### 新增资产（5 个，从 v2.1.2 备份并入）
+
+- `references/assumption-patterns.md`：常见隐式假设模式库（10 条）
+- `references/doc-extraction.md`：老格式 `.doc` 提取方案
+- `references/pdf-output.md`：HTML → PDF 工作流、CSS 类映射、表格行填充、批量报告
+- `scripts/sia-to-pdf.py`：基于 Playwright + Chromium 的 A4 转换脚本
+- `templates/sia-report.html`：L1 完整体检报告 HTML 版式（零外链、零外部资源，可离线渲染）
+
+### 文案与文档
+
+- `SKILL.md` 新增「报告美化输出（可选增强）」一节，明确适用范围与降级规则；`allowed-tools` 从 `Read` 恢复为 `Read, Write, Bash(python)`
+- `README.md` 目录树补齐 5 个资产与 `scripts/` / `templates/`；补 PDF 使用说明与依赖提示
+- 当前版本标签统一 v3.2.1（SKILL.md / README.md / CHANGELOG.md / NOTICE.md / l2-report-template.md）
+
+### 公开前脱敏与适配（改动点，逐条可核验）
+
+- 5 个资产原为 CRLF，统一转 LF；UTF-8 无 BOM
+- `pdf-output.md` / `doc-extraction.md` 中的示例绝对路径改为 `<...>` 占位符
+- `doc-extraction.md` 移除第三方下载站 URL，改为「从所用系统的包管理器获取对应版本」
+- `sia-to-pdf.py` 的 print 去除 `✅` 符号
+- `pdf-output.md` 顶部补适用范围：模板是 **L1 七板块基础结构**，v2.2 新增的 SDG 对齐 / 非预期结果需手动追加；L2 / D 线报告继续用 Markdown 模板，不套用
+- HTML 模板渲染内容原样保留（含 🟢🔺🏆🟡🔴 等版式符号），未改动版式
+
+### 诚实边界
+
+- PDF 输出是**可选增强**，需本机一次性安装 Playwright + Chromium（首次联网）；核心评估仍是纯离线、不依赖该工具
+- 依赖缺失或转换失败时降级为 Markdown，不阻塞评估结论
+- PDF 转换不改变任何评分、评分锚点或证据定级结论
+- **未并入** v2.1.2 的 `LICENSE.txt` / `README.md` / `SKILL.md`：三者含付费版导流表述，且开源版已有对应文件
+
+### 未改动
+
+- v3.2.0 及更早历史条目按「追加不覆盖」原样保留，其中 `自 v3.2.0 起…` 等历史陈述不改
+- 评分锚点、证据五级、五类指标集、D 线评分卡、L3 草案、`server/` 三件套零改动
+- 生产服务端边界不变：完整源码仍不开放、不排期
+
+---
+
 ## v3.2.0（2026-11-09）— 全面取消付费 + 开放边界重定 + 服务端可公开资产
 
 **定位变更**：本项目后续不再设置任何付费层。历史按次计费链路与付费版产品线整体退出，本仓库为唯一发行版；L1 / L2 / L3 草案 / D 线全部免费开源。

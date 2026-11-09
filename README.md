@@ -5,7 +5,7 @@
 > L3 是"估价单"——这些改变值多少？  
 > D 线是"信用底座"——把钱给这个主体值不值得？
 
-**版本**：v3.2.0（2026-11-09） ｜ **许可**：MIT ｜ **作者**：insigoo（因思阁 · 广州市因思阁咨询有限公司）  
+**版本**：v3.2.1（2026-11-09） ｜ **许可**：MIT ｜ **作者**：insigoo（因思阁 · 广州市因思阁咨询有限公司）  
 **仓库**：github.com/ericyueric/insigoo-sia-open ｜ **联系**：<insigoo@insigoo.cn>  
 **开放原则**：全量免费、无付费层、可离线运行；本仓库为唯一发行版
 
@@ -83,7 +83,7 @@ L2 总分 = D1(25) + D2(30) + D3(25) + D4(20)，满分 100
 
 ```
 insigoo-sia-open/
-├── SKILL.md                                   # 技能主文件（L1 + L2 + D 线全部规则，v3.2.0）
+├── SKILL.md                                   # 技能主文件（L1 + L2 + D 线全部规则，v3.2.1）
 ├── LICENSE                                    # MIT
 ├── NOTICE.md                                  # 商标 / 数据范围 / 免责补充
 ├── README.md / CHANGELOG.md
@@ -101,12 +101,19 @@ insigoo-sia-open/
 │   ├── d1-kyb-dimensions.md                   # D1 组织 KYB 八维
 │   ├── d2-kyi-bridge.md                       # D2 成果核验（桥接 L2 证据五级）
 │   ├── adverse-media-guide.md                 # 舆情人工判定指引
+│   ├── assumption-patterns.md                 # v3.2.1 并入：常见隐式假设模式库
+│   ├── doc-extraction.md                      # v3.2.1 并入：老格式 .doc 提取
+│   ├── pdf-output.md                          # v3.2.1 并入：HTML/PDF 报告输出指引
 │   └── l3/                                    # ★ L3 价值评估层（v0.3 方法草案）
 │       ├── l3-design-draft.md                 #   方法论全文（v0.2 原稿 + v0.3 开源升级说明）
 │       ├── l3-redline-double-deduction.md     #   ⚠️ 重复扣减红线（出具货币化结论前必读）
 │       ├── l3-calculator.ts                   #   三算子参考实现（纯函数 · 零依赖 · MIT）
 │       ├── case-study-rural-water.md          #   唯一端到端验证案例（脱敏版）
 │       └── REFERENCES.md                      #   方法论基础（SVI / OECD-DAC）与参考文献
+├── scripts/
+│   └── sia-to-pdf.py                          # v3.2.1 并入：HTML → A4 PDF（Playwright）
+├── templates/
+│   └── sia-report.html                        # v3.2.1 并入：L1 体检报告 HTML 版式
 └── server/                                    # ★ v3.2.0 新增：可公开服务端资产
     ├── README.md                              #   架构 / 接口约定 / 环境变量 / 字段清单 / 开放边界
     ├── calc.ts                                #   净贡献率 / 三信号 / SROI 毛净判定（纯函数）
@@ -123,8 +130,9 @@ insigoo-sia-open/
    - L2：`深度评估一下 XX 项目` / `证据有多强` / `指标盘点`
    - D 线：`组织尽调` / `发起人尽调` / `主体评估` / `KYC` / `KYB` / `KYI`
 3. L2 有硬门槛：项目须先通过 L1（快检 ≥6 分 / 完整体检基础期及以上 / 3-5.5 分但 Q3Q4Q7 均达标），未通过会被退回先做 L1。
+4. 需要 HTML / PDF 交付物时说「出一份 PDF 报告」，按 `references/pdf-output.md` 走可选增强（需本机安装 Playwright + Chromium；模板仅适用于 L1 完整体检报告）。
 
-**离线可用**：全流程不联网、不依赖任何外部服务。若想与 223 个项目库做同类目对标，可**选配**接入 `sia-kb` MCP Server（见下节）。
+**离线可用**：全流程不联网、不依赖任何外部服务。HTML / PDF 报告为可选增强，需一次性安装 Playwright + Chromium（首次联网，之后离线可用），依赖缺失时降级为 Markdown。若想与 223 个项目库做同类目对标，可**选配**接入 `sia-kb` MCP Server（见下节）。
 
 ---
 
@@ -165,7 +173,7 @@ WorkBuddy 用户可在 `~/.workbuddy/mcp.json` 增加 `sia-kb` 条目后重载�
 
 ## 引用
 
-> 因思阁(insigoo). 《公益项目社会影响力评估框架 SIA v3.2.0：L1 逻辑自洽 + L2 指标量化 + L3 社会价值评估 + D 线主体评估》[EB/OL]. github.com/ericyueric/insigoo-sia-open, 2026. MIT License.
+> 因思阁(insigoo). 《公益项目社会影响力评估框架 SIA v3.2.1：L1 逻辑自洽 + L2 指标量化 + L3 社会价值评估 + D 线主体评估》[EB/OL]. github.com/ericyueric/insigoo-sia-open, 2026. MIT License.
 
 ## 贡献
 

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>{项目名称} — SIA L1 逻辑体检报告</title>
+<style>
+  @page {
+    size: A4;
+    margin: 18mm 20mm 25mm 20mm;
+    @bottom-center { content: counter(page); font-size: 9pt; color: #999; font-family: "Microsoft YaHei", sans-serif; }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif;
+    font-size: 10.5pt; line-height: 1.75; color: #333; counter-reset: h2-counter;
+  }
+
+  .content { padding: 0; }
+  .content > * { page-break-inside: avoid; }
+
+  .project-section { page-break-before: always; padding-top: 10px; }
+  .project-section:first-of-type { page-break-before: avoid; }
+
+  /* ===== 报告标题 ===== */
+  .report-title {
+    text-align: center; padding: 30px 0 20px 0; border-bottom: 3px solid #1B2A4A; margin-bottom: 25px;
+  }
+  .report-title h1 {
+    font-size: 20pt; color: #1B2A4A; letter-spacing: 2px; margin-bottom: 6px;
+    border-bottom: none; padding-bottom: 0;
+  }
+  .report-title .subtitle {
+    font-size: 10pt; color: #888; letter-spacing: 1px;
+  }
+  .report-title .subtitle span { color: #D4A843; font-weight: 600; }
+
+  h1 {
+    font-size: 15pt; color: #1B2A4A; border-bottom: 2px solid #D4A843;
+    padding-bottom: 6px; margin: 28px 0 14px 0; letter-spacing: 1px;
+  }
+  h2 {
+    font-size: 12pt; color: #1B2A4A; margin: 18px 0 10px 0;
+    padding-left: 10px; border-left: 3px solid #D4A843;
+    counter-increment: h2-counter;
+  }
+  h2::before { content: counter(h2-counter) ". "; color: #D4A843; }
+  h3 { font-size: 10.5pt; color: #2D4A7A; margin: 14px 0 6px 0; }
+
+  p { margin: 5px 0; }
+  ul, ol { margin: 6px 0 6px 20px; }
+  li { margin: 3px 0; }
+
+  /* ===== 状态标签 ===== */
+  .badge {
+    display: inline-block; padding: 2px 10px; border-radius: 12px;
+    font-size: 9pt; font-weight: 600; letter-spacing: 0.5px;
+  }
+  .badge-pass { background: #E8F5E9; color: #2E7D32; }
+  .badge-warn { background: #FFF8E1; color: #F57F17; }
+  .badge-fail { background: #FFEBEE; color: #C62828; }
+  .badge-info { background: #E3F2FD; color: #1565C0; }
+  .badge-gold { background: #FFF3E0; color: #E65100; }
+
+  /* ===== 健康度等级 ===== */
+  .health-badge {
+    display: inline-block; padding: 6px 20px; border-radius: 20px;
+    font-size: 12pt; font-weight: 700; margin: 10px 0;
+  }
+  .health-green  { background: #E8F5E9; color: #2E7D32; border: 2px solid #2E7D32; }
+  .health-yellow { background: #FFFDE7; color: #F9A825; border: 2px solid #F9A825; }
+  .health-orange { background: #FFF3E0; color: #E65100; border: 2px solid #E65100; }
+  .health-red    { background: #FFEBEE; color: #C62828; border: 2px solid #C62828; }
+
+  /* ===== 表格 ===== */
+  table {
+    width: 100%; border-collapse: collapse; margin: 12px 0 16px 0;
+    font-size: 9.5pt; line-height: 1.5;
+  }
+  thead th {
+    background: #1B2A4A; color: white; font-weight: 600;
+    padding: 9px 10px; text-align: left; border: 1px solid #1B2A4A;
+    font-size: 9.5pt; letter-spacing: 0.5px;
+  }
+  tbody td {
+    padding: 8px 10px; border: 1px solid #D0D0D0;
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) { background: #F8F9FB; }
+  tbody tr:hover { background: #EEF2F8; }
+
+  td.num { text-align: center; font-weight: 600; }
+  td.center { text-align: center; }
+
+  /* ===== 评分卡高亮 ===== */
+  .score-high   { color: #2E7D32; font-weight: 700; font-size: 13pt; }
+  .score-mid    { color: #F57F17; font-weight: 700; font-size: 13pt; }
+  .score-low    { color: #C62828; font-weight: 700; font-size: 13pt; }
+
+  /* ===== 信息卡片 ===== */
+  .info-card {
+    background: #F8F9FB; border: 1px solid #E0E0E0;
+    border-radius: 6px; padding: 16px 20px; margin: 12px 0;
+  }
+  .info-card .row { display: flex; padding: 4px 0; font-size: 10pt; }
+  .info-card .label { color: #888; min-width: 100px; flex-shrink: 0; }
+  .info-card .value { color: #333; font-weight: 500; }
+
+  /* ===== 速览面板 ===== */
+  .overview-grid {
+    display: flex; gap: 12px; margin: 14px 0; flex-wrap: wrap;
+  }
+  .overview-item {
+    flex: 1; min-width: 130px; text-align: center;
+    background: #F8F9FB; border: 1px solid #E0E0E0;
+    border-radius: 6px; padding: 12px 8px;
+  }
+  .overview-item .ov-num { font-size: 18pt; font-weight: 700; color: #1B2A4A; }
+  .overview-item .ov-label { font-size: 8.5pt; color: #888; margin-top: 4px; }
+
+  /* ===== 风险标签 ===== */
+  .risk-high { color: #C62828; font-weight: 600; }
+  .risk-mid  { color: #F57F17; font-weight: 600; }
+  .risk-low  { color: #2E7D32; font-weight: 600; }
+
+  /* ===== 处方 ===== */
+  .prescription {
+    border-left: 4px solid #D4A843; background: #FFFDF5;
+    padding: 10px 14px; margin: 8px 0; border-radius: 0 4px 4px 0;
+    font-size: 10pt;
+  }
+  .prescription.p0 { border-left-color: #C62828; background: #FFF5F5; }
+  .prescription.p1 { border-left-color: #F57F17; background: #FFFDF5; }
+  .prescription.p2 { border-left-color: #2E7D32; background: #F5FFF5; }
+
+  /* ===== 对比表高亮行 ===== */
+  tbody tr.best { background: #E8F5E9 !important; }
+  tbody tr.best td:first-child::after { content: " 🏆"; }
+
+  /* ===== 分档标签 ===== */
+  .tier-tag {
+    display: inline-block; padding: 3px 10px; border-radius: 4px;
+    font-size: 9pt; font-weight: 700;
+  }
+  .tier-a { background: #E8F5E9; color: #2E7D32; }
+  .tier-b { background: #FFF8E1; color: #F57F17; }
+  .tier-c { background: #FFEBEE; color: #C62828; }
+
+  /* ===== 信息缺口提示 ===== */
+  .gap-note {
+    background: #FFF8E1; border-left: 4px solid #F57F17;
+    padding: 10px 14px; margin: 12px 0; font-size: 9.5pt;
+  }
+
+  /* ===== ToC 流程图 ===== */
+  .toc-flow {
+    background: #F0F5FA; border: 1px solid #B0C4DE;
+    border-radius: 6px; padding: 16px 20px; margin: 12px 0;
+  }
+
+  /* ===== 页尾 ===== */
+  .end-note {
+    margin-top: 40px; padding-top: 15px; border-top: 1px solid #E0E0E0;
+    font-size: 8.5pt; color: #AAA; text-align: center; line-height: 1.8;
+  }
+</style>
+</head>
+<body>
+
+<div class="content">
+
+<div class="report-title">
+  <h1>{项目名称}</h1>
+  <div class="subtitle">
+    <span>insigoo SIA L1</span> 逻辑自洽评估报告 &nbsp;|&nbsp;
+    评估日期：{评估日期} &nbsp;|&nbsp;
+    评估模式：{评估模式} &nbsp;|&nbsp;
+    被评估机构：{申请机构}
+  </div>
+</div>
+
+<h1>一、体检速览</h1>
+
+<div style="display:flex; align-items:center; gap:16px; margin:12px 0;">
+  <div class="health-badge {健康度CSS类}">{健康度图标} {健康度文字}</div>
+  <div class="badge {成熟度CSS类}">{成熟度等级}</div>
+</div>
+
+<div class="overview-grid">
+  <div class="overview-item"><div class="ov-num">{信息充分度}/10</div><div class="ov-label">信息充分度</div></div>
+  <div class="overview-item"><div class="ov-num">{逻辑完整性得分}</div><div class="ov-label">逻辑完整性 /25</div></div>
+  <div class="overview-item"><div class="ov-num">{合一性结果}</div><div class="ov-label">合一性校验</div></div>
+  <div class="overview-item"><div class="ov-num">🔴{红数} 🟡{黄数}</div><div class="ov-label">假设风险</div></div>
+</div>
+
+<h3>三大关键发现</h3>
+<ol>
+  <li><strong>{发现1标题}</strong>：{发现1详情}</li>
+  <li><strong>{发现2标题}</strong>：{发现2详情}</li>
+  <li><strong>{发现3标题}</strong>：{发现3详情}</li>
+</ol>
+
+<h1>二、项目信息摘要</h1>
+
+<div class="info-card">
+  <div class="row"><span class="label">项目名称</span><span class="value">{项目名称}</span></div>
+  <div class="row"><span class="label">申请机构</span><span class="value">{申请机构}</span></div>
+  <div class="row"><span class="label">项目周期</span><span class="value">{项目周期}</span></div>
+  <div class="row"><span class="label">项目金额</span><span class="value">{项目金额}</span></div>
+  <div class="row"><span class="label">目标受益群体</span><span class="value">{目标受益群体}</span></div>
+  <div class="row"><span class="label">核心活动</span><span class="value">{核心活动简述}</span></div>
+  <div class="row"><span class="label">信息充分度</span><span class="value">{信息充分度}/10 — {评价}</span></div>
+</div>
+
+<div class="gap-note">
+  <strong>⚠️ 信息缺口</strong>：{缺失项简要说明，无缺口则写"无关键信息缺失"}
+</div>
+
+<h1>三、变革理论 (ToC) 重建</h1>
+
+<div class="toc-flow">
+  <p style="text-align:center;font-size:10.5pt;line-height:2.2;font-family:Consolas,monospace;">
+    <strong>投入</strong>：{投入简述}<br>
+    ⬇<br>
+    <strong>活动</strong>：{活动简述}<br>
+    ⬇<br>
+    <strong>产出</strong>：{产出简述}<br>
+    ⬇<br>
+    <strong>成果</strong>：<span style="color:#1B2A4A;">短期</span> → {短期成果} &nbsp;|&nbsp; <span style="color:#2D4A7A;">中期</span> → {中期成果} &nbsp;|&nbsp; <span style="color:#D4A843;">长期</span> → {长期成果}<br>
+    ⬇<br>
+    <strong>影响</strong>：{影响简述}
+  </p>
+</div>
+
+<p style="font-size:9pt;color:#888;margin-top:6px;">🔺 关键假设：{关键假设简述}</p>
+
+<h1>四、四维体检明细</h1>
+
+<table>
+  <thead><tr><th style="width:18%;">体检项</th><th style="width:12%;">结果</th><th>关键发现</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>逻辑链体检</strong></td>
+      <td class="center"><span class="badge {逻辑链badge}">{逻辑链结果}</span></td>
+      <td>{逻辑链关键发现}</td>
+    </tr>
+    <tr>
+      <td><strong>合一性校验</strong></td>
+      <td class="center"><span class="badge {合一性badge}">{合一性结果}</span></td>
+      <td>
+        驱动力(Aim)：{驱动力评价}<br>
+        行动力(Action)：{行动力评价}<br>
+        改变力(Action-effect)：{改变力评价}
+      </td>
+    </tr>
+    <tr>
+      <td><strong>假设风险筛查</strong></td>
+      <td class="center"><span class="badge {假设badge}">{假设结果}</span></td>
+      <td>
+        <span class="risk-high">🔴 {红数}个</span> &nbsp;
+        <span class="risk-mid">🟡 {黄数}个</span> &nbsp;
+        <span class="risk-low">🟢 {绿数}个</span>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>受益方视角</strong></td>
+      <td class="center"><span class="badge {受益方badge}">{受益方结果}</span></td>
+      <td>{受益方关键发现}</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>假设风险清单</h3>
+<table>
+  <thead><tr><th>假设</th><th style="width:10%;">类型</th><th style="width:10%;">可靠性</th><th>失效后果</th></tr></thead>
+  <tbody>
+    {假设清单行}
+  </tbody>
+</table>
+
+<h1>五、问题清单与处方</h1>
+
+<table>
+  <thead><tr><th style="width:8%;">编号</th><th style="width:20%;">位置</th><th>问题描述</th><th style="width:10%;">类型</th><th style="width:10%;">优先级</th></tr></thead>
+  <tbody>
+    {问题清单行}
+  </tbody>
+</table>
+
+{处方内容：按P0→P1→P2排列，每条使用 .prescription p0/p1/p2 样式}
+
+<h1>六、成熟度与升级路径</h1>
+
+<div class="info-card">
+  <p><strong>当前等级</strong>：{成熟度等级} — {等级说明}</p>
+  <p style="margin-top:8px;"><strong>升级路径</strong>：{从当前到下一等级的具体行动}</p>
+</div>
+
+<h1>七、复诊建议</h1>
+<ul>
+  <li><strong>建议复诊时机</strong>：{复诊时机}</li>
+  <li><strong>如需 L2 量化指标或 L3 价值核算</strong>：本报告可作为输入基础</li>
+</ul>
+
+<div class="end-note">
+  <p>本报告由 <strong>insigoo SIA L1 v1.2</strong> 框架自动生成</p>
+  <p>基于友成三A三力理论与社会影响力评估标准 · MIT License</p>
+  <p>⚠️ 本报告为 AI 辅助诊断意见，重大资助决策需结合人工尽调与专家判断</p>
+  <p>insigoo@insigoo.cn · github.com/ericyueric</p>
+</div>
+
+</div>
+</body>
+</html>
