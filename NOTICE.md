@@ -26,7 +26,7 @@
 
 ## 3. 引用格式（建议）
 
-> 因思阁(insigoo). 《公益项目社会影响力评估框架 SIA v3.0.0：L1 逻辑自洽 + L2 指标量化 + L3 社会价值评估》[EB/OL]. github.com/ericyueric/insigoo-sia-open, 2026. MIT License.
+> 因思阁(insigoo). 《公益项目社会影响力评估框架 SIA v3.1.0：L1 逻辑自洽 + L2 指标量化 + L3 社会价值评估》[EB/OL]. github.com/ericyueric/insigoo-sia-open, 2026. MIT License.
 
 ---
 

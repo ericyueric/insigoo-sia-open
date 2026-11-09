@@ -4,7 +4,7 @@
 > L2 是"化验单"——你的成果量得出吗？证据有多强？  
 > L3 是"估价单"——这些改变值多少？
 
-**版本**：v3.0.0（2026-10-01） ｜ **许可**：MIT ｜ **作者**：insigoo（因思阁 · 广州市因思阁咨询有限公司）  
+**版本**：v3.1.0（2026-11-09） ｜ **许可**：MIT ｜ **作者**：insigoo（因思阁 · 广州市因思阁咨询有限公司）  
 **仓库**：github.com/ericyueric/insigoo-sia-open ｜ **联系**：<insigoo@insigoo.cn>
 
 ---
@@ -78,7 +78,7 @@ L2 总分 = D1(25) + D2(30) + D3(25) + D4(20)，满分 100
 
 ```
 insigoo-sia-open/
-├── SKILL.md                              # 技能主文件（L1 + L2 全部规则，v3.0.0）
+├── SKILL.md                              # 技能主文件（L1 + L2 全部规则，v3.1.0）
 ├── LICENSE                               # MIT
 ├── NOTICE.md                             # 商标 / 数据范围 / 免责补充
 ├── README.md / CHANGELOG.md
@@ -133,7 +133,7 @@ insigoo-sia-open/
 
 ## 引用
 
-> 因思阁(insigoo). 《公益项目社会影响力评估框架 SIA v3.0.0：L1 逻辑自洽 + L2 指标量化 + L3 社会价值评估》[EB/OL]. github.com/ericyueric/insigoo-sia-open, 2026. MIT License.
+> 因思阁(insigoo). 《公益项目社会影响力评估框架 SIA v3.1.0：L1 逻辑自洽 + L2 指标量化 + L3 社会价值评估》[EB/OL]. github.com/ericyueric/insigoo-sia-open, 2026. MIT License.
 
 ## 贡献
 
